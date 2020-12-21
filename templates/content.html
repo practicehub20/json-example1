@@ -1,0 +1,99 @@
+{% extends 'index.html' %}
+
+{% if result %}
+    {% block content %}
+        <p style="padding-top: 45px"></p>
+        {% if error %}
+            <table align="center">
+                <tr>
+                    <th  style="background-color: red;color: white;text-align: center;padding: 10px"> {{ error }}</th>
+                </tr>
+            </table>
+        {% else %}
+            <table align="center" border="2" class="tab">
+                <tr class="trh">
+                    <th colspan="7" class="trh">{{ name }} - TRAIN INFORMATION</th>
+                </tr>
+                <tr class="trh">
+                    <th class="trh">TRAIN NUMBER</th>
+                    <th class="trh">TRAIN NAME</th>
+                    <th class="trh">FROM</th>
+                    <th class="trh">TO</th>
+                    <th class="trh">DAYS</th>
+                    <th class="trh">ARRIVAL TIME</th>
+                    <th class="trh">DEPARTURE TIME</th>
+                </tr>
+                {% for foo in result %}
+                    <tr class="trh">
+                        <th class="trh">{{ foo.train_num }}</th>
+                        <th class="trh">{{ foo.name }}</th>
+                        <th class="trh">{{ foo.train_from }}</th>
+                        <th class="trh">{{ foo.train_to }}</th>
+                        <th class="trh">
+                            <table border="2" class="tab">
+                                <tr class="trh">
+                                    <th class="trh">Mon</th>
+                                    <th class="trh">Tue</th>
+                                    <th class="trh">Wed</th>
+                                    <th class="trh">Thu</th>
+                                    <th class="trh">Fri</th>
+                                    <th class="trh">Sat</th>
+                                    <th class="trh">Sun</th>
+                                </tr>
+                                <tr class="trh">
+                                    {% if foo.data.days.Mon == 1 %}
+                                        <th class="green"></th>
+                                    {% else %}
+                                        <th class="red"></th>
+                                    {% endif %}
+                                    {% if foo.data.days.Tue == 1 %}
+                                        <th class="green"></th>
+                                    {% else %}
+                                        <th class="red"></th>
+                                    {% endif %}
+                                    {% if foo.data.days.Wed == 1 %}
+                                        <th class="green"></th>
+                                    {% else %}
+                                        <th class="red"></th>
+                                    {% endif %}
+                                    {% if foo.data.days.Thu == 1 %}
+                                        <th class="green"></th>
+                                    {% else %}
+                                        <th class="red"></th>
+                                    {% endif %}
+                                    {% if foo.data.days.Fri == 1 %}
+                                        <th class="green"></th>
+                                    {% else %}
+                                        <th class="red"></th>
+                                    {% endif %}
+                                    {% if foo.data.days.Sat == 1 %}
+                                        <th class="green"></th>
+                                    {% else %}
+                                        <th class="red"></th>
+                                    {% endif %}
+                                    {% if foo.data.days.Sun == 1 %}
+                                        <th class="green"></th>
+                                    {% else %}
+                                        <th class="red"></th>
+                                    {% endif %}
+                                </tr>
+                            </table>
+                        </th>
+                        <th>{{ foo.data.arriveTime }}</th>
+                        <th>{{ foo.data.departTime }}</th>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        <p style="padding-top: 10px"></p>
+        <table align="center">
+            <tr>
+                <th class="green"></th>
+                <th style="font-family: 'Times New Roman'"> - Availabe</th>
+                <th style="padding-right: 20px"></th>
+                <th class="red"></th>
+                <th style="font-family: 'Times New Roman'"> - Not Available</th>
+            </tr>
+        </table>
+    {% endblock %}
+{% endif %}
